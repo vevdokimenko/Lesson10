@@ -16,10 +16,9 @@ public class MyIterator<T> implements Iterator<T> {
         try {
             T t = array[index];
             return true;
-        } catch (Exception ignored) {
-
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -34,7 +33,7 @@ public class MyIterator<T> implements Iterator<T> {
     }
 
     public static void main(String[] args) {
-        Integer[] arr = {1,2,3,4,5};
+        Integer[] arr = {};
         MyIterator<Integer> myIterator = new MyIterator<>(arr);
 
         while (myIterator.hasNext()) {
