@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 public class MyIterator<T> implements Iterator<T> {
     private int index;
-    private T[] array;
+    private final T[] array;
 
     public MyIterator(T[] array) {
         this.array = array;
@@ -16,24 +16,29 @@ public class MyIterator<T> implements Iterator<T> {
         try {
             T t = array[index];
             return true;
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
+
         }
         return false;
     }
 
     @Override
     public T next() {
-        if (this.hasNext())
-            return this.array[index];
-        return null;
+        T result;
+        if (this.hasNext()) {
+            result = this.array[index];
+            index++;
+            return result;
+        }
+        throw new NoSuchElementException();
     }
 
     public static void main(String[] args) {
-        Integer[] arr = {1,2};
+        Integer[] arr = {1,2,3,4,5};
         MyIterator<Integer> myIterator = new MyIterator<>(arr);
 
-        System.out.println(myIterator.hasNext());
-        System.out.println(myIterator.next());
+        while (myIterator.hasNext()) {
+            System.out.println(myIterator.next());
+        }
     }
 }
