@@ -14,4 +14,5 @@ public class MyClass<T> {
     public static void main(String[] args) {
         new MyClass<Integer>(10).show();
     }
+
 }
